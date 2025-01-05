@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 
 from .models import Member, LoginUserForm
@@ -29,8 +28,7 @@ def addrec(request):
     return redirect("/")
 
 # Удаление записи
-def delete(PermissionRequiredMixin, id):
-    permission_required = 'main.delete_member'
+def delete(request, id):
     mem = Member.objects.get(id=id)
     mem.delete()
     return redirect("/")
